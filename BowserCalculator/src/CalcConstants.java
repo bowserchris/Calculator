@@ -68,6 +68,9 @@ public class CalcConstants {
 	public static final LayoutManager PANEL_LAYOUT_MANAGER = new GridLayout(5,4,2,2);
 	public static final Color PANEL_BACKGROUND = Color.BLACK;
 	
+	public static final boolean FUNCTION_BUTTON_FOCUSABLE = false;
+	public static final boolean NUMBER_BUTTON_FOCUSABLE = false;
+	
 	public static final String STRING_ADD_BUTTON = "+";
 	public static final String STRING_SUB_BUTTON = "-";
 	public static final String STRING_MUL_BUTTON = "*";
