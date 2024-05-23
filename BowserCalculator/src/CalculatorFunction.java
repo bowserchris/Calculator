@@ -1,4 +1,4 @@
 
-public class CalculatorFunction {
+public class CalculatorFunction extends CalculatorDisplay {
 
 }
