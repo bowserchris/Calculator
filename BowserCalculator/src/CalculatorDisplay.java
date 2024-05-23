@@ -1,5 +1,4 @@
-import java.awt.Color;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +28,8 @@ public class CalculatorDisplay {
 
 	private void createGUI() {
 		
+		ImageIcon icon = new ImageIcon(CalcConstants.APP_ICON_PATH);
+		
 		frame = new JFrame(CalcConstants.APP_TITLE);			//instantiates the frame with my designated title 'bowser calculator' or whatever else i wish to input
 		frame.setDefaultCloseOperation(CalcConstants.FRAME_CLOSE_METHOD);//what the x button does on clicking
 		frame.setSize(CalcConstants.FRAME_WIDTH,CalcConstants.FRAME_HEIGHT);								//this sets the size and customability measured by pixels 420 pixels by 550
@@ -36,6 +37,7 @@ public class CalculatorDisplay {
 		frame.setBackground(CalcConstants.FRAME_BACKGROUND);
 		frame.setResizable(CalcConstants.FRAME_RESIZABLE);	
 		frame.setLocationRelativeTo(CalcConstants.FRAME_SPAWN_OPEN);//sets popup location to centre of screen
+		frame.setIconImage(icon.getImage());
 		
 	}
 	
