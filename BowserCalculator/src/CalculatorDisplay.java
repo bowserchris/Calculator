@@ -22,7 +22,6 @@ public class CalculatorDisplay {
 		createGUI();
 		createComponents();
 		createButtons();
-		frame.setVisible(true);
 		
 	}
 
@@ -49,7 +48,6 @@ public class CalculatorDisplay {
 		label.setBackground(CalcConstants.LABEL_BACKGROUND);
 		label.setForeground(CalcConstants.LABEL_FOREGROUND);
 		label.setHorizontalAlignment(CalcConstants.LABEL_TEXT_HORIZONTAL_ALIGNMENT);
-		frame.add(label);
 		
 		textField = new JTextField();				
 		textField.setBounds(CalcConstants.TEXTFIELD_XPOSITION,CalcConstants.TEXTFIELD_YPOSITION,
@@ -57,14 +55,12 @@ public class CalculatorDisplay {
 		textField.setFont(CalcConstants.FONT_WESTMINSTER);							
 		textField.setEditable(CalcConstants.TEXTFIELD_EDITABLE);
 		textField.setHorizontalAlignment(CalcConstants.TEXTFIELD_TEXT_HORIZONTAL_ALIGNMENT);
-		frame.add(textField);
 		
 		panel = new JPanel();			
 		panel.setBounds(CalcConstants.PANEL_XPOSITION, CalcConstants.PANEL_YPOSITION, 
 						CalcConstants.PANEL_WIDTH, CalcConstants.PANEL_HEIGHT);
 		panel.setLayout(CalcConstants.PANEL_LAYOUT_MANAGER); 
 		panel.setBackground(CalcConstants.PANEL_BACKGROUND);
-		frame.add(panel);
 		
 	}
 	
