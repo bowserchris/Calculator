@@ -11,6 +11,8 @@ public class CalcConstants {
 	
 	// Application general info
 	public static final String APP_TITLE = "Bowser Calculator";
+	public static final String APP_ICON_PATH = "img/calcIcon.png";
+	public static final String APP_FOTO_PATH = "img/tousMini.jpg";
 	
 	// Dimensions for components within app
 	public static final int FRAME_WIDTH = 420;
