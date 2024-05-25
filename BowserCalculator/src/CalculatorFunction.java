@@ -1,13 +1,11 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
-public class CalculatorFunction extends CalculatorDisplay implements ActionListener {
+public class CalculatorFunction extends CalculatorDisplay implements ActionListener, KeyListener {
 	
 	double num1 = 0, num2 = 0, result = 0;
 	char operator;	
@@ -33,6 +31,8 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			this.getNumberButtons()[i].setFont(CalcConstants.FONT_OCR);		
 			this.getNumberButtons()[i].setFocusable(CalcConstants.NUMBER_BUTTON_FOCUSABLE);	
 		}
+		
+		this.getFrame().addKeyListener(this);
 		
 	}
 
@@ -121,6 +121,33 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 		num1 /= num2;
 		this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 	}
+	
+	public void sum() {
+		num2 = Double.parseDouble(this.getTextField().getText());	
+
+		//addition method review & subsequent others
+		switch (operator) {		 
+			case '+': 
+				result = num1 + num2;
+				break;
+			case '-': 
+				result = num1 - num2;
+				break;
+			case '*': 
+				result = num1 * num2;
+				break;
+			case '/': 
+				result = num1 / num2;
+				break;
+		}
+
+		this.getTextField().setText(removeZeroDecimal(Double.toString(result)));
+
+		this.getLabel().setText(removeZeroDecimal(String.valueOf(result)));
+		clearTextField();		
+		num2=result;
+		num1=0;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -167,7 +194,7 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			num1 = Double.parseDouble(this.getTextField().getText());
 			double square = Math.pow(num1, 2);
 			String string = removeZeroDecimal(Double.toString(square));
-			this.getTextField().setText(Double.toString(num1));
+			this.getTextField().setText(string);
 		}
 		
 		if(source == this.getReciButton()) {
@@ -187,31 +214,7 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 		}
 		
 		if(source == this.getEquButton()) {				 
-			num2 = Double.parseDouble(this.getTextField().getText());	
-
-			switch (operator) {		 
-			case '+': 
-				
-				//addition method review & subsequent others
-				result = num1 + num2;
-				break;
-			case '-': 
-				result = num1 - num2;
-				break;
-			case '*': 
-				result = num1 * num2;
-				break;
-			case '/': 
-				result = num1 / num2;
-				break;
-			}
-
-			this.getTextField().setText(removeZeroDecimal(Double.toString(result)));
-
-			this.getLabel().setText(removeZeroDecimal(String.valueOf(result)));
-			clearTextField();		
-			num2=result;
-			num1=0;
+			sum();
 		}
 		
 		if(source == this.getClrButton()) { 				
@@ -235,6 +238,77 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			temporaryValue*=-1;								
 			this.getTextField().setText(removeZeroDecimal(String.valueOf(temporaryValue)));	
 		}
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+		switch (e.getKeyChar()) {
+			case '1':
+				this.getTextField().setText(this.getTextField().getText() + 1);
+				break;
+			case '2':
+				this.getTextField().setText(this.getTextField().getText() + 2);
+				break;
+			case '3':
+				this.getTextField().setText(this.getTextField().getText() + 3);
+				break;
+			case '4':
+				this.getTextField().setText(this.getTextField().getText() + 4);
+				break;
+			case '5':
+				this.getTextField().setText(this.getTextField().getText() + 5);
+				break;
+			case '6':
+				this.getTextField().setText(this.getTextField().getText() + 6);
+				break;
+			case '7':
+				this.getTextField().setText(this.getTextField().getText() + 7);
+				break;
+			case '8':
+				this.getTextField().setText(this.getTextField().getText() + 8);
+				break;
+			case '9':
+				this.getTextField().setText(this.getTextField().getText() + 9);
+				break;
+			case '0':
+				this.getTextField().setText(this.getTextField().getText() + 0);
+				break;
+			case '+':
+				addition();
+				clearTextField();
+				break;
+			case '-':
+				subtraction();
+				clearTextField();
+				break;
+			case '*':
+				multiply();
+				clearTextField();
+				break;
+			case '/':
+				division();
+				clearTextField();
+				break;
+			case '.':
+				this.getTextField().setText(this.getTextField().getText() + ".");
+				break;
+		}
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		if (e.getKeyCode() == 10) {
+			sum();
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 		
 	}
 
