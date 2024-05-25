@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -6,6 +7,7 @@ import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class CalcConstants {
 	
@@ -13,6 +15,7 @@ public class CalcConstants {
 	public static final String APP_TITLE = "Bowser Calculator";
 	public static final String APP_ICON_PATH = "img/calcIcon.png";
 	public static final String APP_FOTO_PATH = "img/tousMini.jpg";
+	public static final String POP_UP_FOTO_TITLE = "Bearbies!";
 	
 	// Dimensions for components within app
 	public static final int FRAME_WIDTH = 420;
@@ -47,6 +50,11 @@ public class CalcConstants {
 	public static final int BUTTON_CLR_YPOSITION = 450;
 	public static final int BUTTON_CLR_WIDTH = 140;
 	public static final int BUTTON_CLR_HEIGHT = 50;
+	
+	public static final int POP_UP_FOTO_WIDTH = 520;
+	public static final int POP_UP_FOTO_HEIGHT = 520;
+	public static final int POP_UP_FOTO_HINTS = 0;
+	
 	
 	// Personalization of app details
 	public static final Font FONT_OCR = new Font("OCR A Extended", Font.BOLD,30);
@@ -88,6 +96,11 @@ public class CalcConstants {
 	public static final Color BUTTON_BACKGROUND = Color.RED;
 	public static final Color BUTTON_FOREGROUND = Color.WHITE;
 	public static final Color BUTTON_FUNCTION_BACKGROUND = new Color(239,188,2);
+	
+	public static final String POP_UP_FOTO_LAYOUT = BorderLayout.CENTER;
+	public static final int POP_UP_FOTO_CLOSE_METHOD = WindowConstants.DISPOSE_ON_CLOSE;
+	public static final Component POP_UP_FOTO_SPAWN_OPEN = null;
+	public static final boolean POP_UP_FOTO_FRAME_VISIBLE = true;
 	
 	
 	public CalcConstants() {	}
