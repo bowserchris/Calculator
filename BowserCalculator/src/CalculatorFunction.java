@@ -1,9 +1,19 @@
+import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.WindowConstants;
 
 public class CalculatorFunction extends CalculatorDisplay implements ActionListener, KeyListener {
 	
@@ -140,6 +150,10 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 				result = num1 / num2;
 				break;
 		}
+		
+		if (result == 5318008) {
+			bearbies();
+		}
 
 		this.getTextField().setText(removeZeroDecimal(Double.toString(result)));
 
@@ -147,6 +161,40 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 		clearTextField();		
 		num2=result;
 		num1=0;
+	}
+
+	private void bearbies() {
+		
+		File image = new File(CalcConstants.APP_FOTO_PATH);
+		BufferedImage img = null;
+		
+		try {
+			img = ImageIO.read(image);
+		} catch (IOException ioe) {
+			ioe.printStackTrace(System.out);
+		}
+		
+		if (img != null) {
+			display(img);
+		}
+		
+	}
+
+	private void display(BufferedImage img) {
+		
+		JFrame frame = new JFrame(CalcConstants.POP_UP_FOTO_TITLE);
+		JLabel label = new JLabel();
+		Image icon = img.getScaledInstance(CalcConstants.POP_UP_FOTO_WIDTH,CalcConstants.POP_UP_FOTO_HEIGHT,
+											CalcConstants.POP_UP_FOTO_HINTS);
+		frame.setSize(CalcConstants.POP_UP_FOTO_WIDTH,CalcConstants.POP_UP_FOTO_HEIGHT);
+		frame.setIconImage(img);
+		label.setIcon(new ImageIcon(icon));
+		frame.getContentPane().add(label, CalcConstants.POP_UP_FOTO_LAYOUT);
+		frame.setDefaultCloseOperation(CalcConstants.POP_UP_FOTO_CLOSE_METHOD);
+		frame.setLocationRelativeTo(CalcConstants.POP_UP_FOTO_SPAWN_OPEN);
+		frame.pack(); 			//attaches image to frame
+		frame.setVisible(CalcConstants.POP_UP_FOTO_FRAME_VISIBLE);
+		
 	}
 
 	@Override
