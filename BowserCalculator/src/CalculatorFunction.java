@@ -93,47 +93,91 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 	public static String removeZeroDecimal(String s) {
 		String string = s;
 		if (string.endsWith(".0")) {
-			string.replace(".0", "");
+			string = string.replace(".0", "");
 		} 
 		return string;
 	}
 	
+	private void deleteLastChar() {
+		String textMemory = this.getTextField().getText();		
+		clearTextField();							
+		for (int i = 0; i < textMemory.length() - 1; i++) {	
+			this.getTextField().setText(this.getTextField().getText() + textMemory.charAt(i));
+		}
+	}
+	
 	public void addition() {
-		num2 = num1;
-		num1 = Double.parseDouble(this.getTextField().getText());
-		operator = '+';		
-		num1 += num2;
-		this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		
+		if (this.getLabel().getText().isEmpty()) {
+			num1 = Double.parseDouble(this.getTextField().getText());
+			operator = '+';
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
+			num2 = Double.parseDouble(this.getTextField().getText());
+			operator = '+';		
+			num1 += num2;
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else {
+			sum();
+		}
+		
 	}
 	
 	public void subtraction() {
-		num2 = num1;
-		num1 = Double.parseDouble(this.getTextField().getText());	
-		operator = '-';	
-		num1 -= num2;
-		this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+
+		if (this.getLabel().getText().isEmpty()) {
+			num1 = Double.parseDouble(this.getTextField().getText());
+			operator = '-';
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
+			num2 = Double.parseDouble(this.getTextField().getText());
+			operator = '-';		
+			num1 -= num2;
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else {
+			sum();
+		}
+		
 	}
 	
 	public void multiply() {
-		num2 = num1;
-		num1 = Double.parseDouble(this.getTextField().getText());	
-		operator = '*';									
-		num1 *= num2;
-		this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+
+		if (this.getLabel().getText().isEmpty()) {
+			num1 = Double.parseDouble(this.getTextField().getText());
+			operator = '*';
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
+			num2 = Double.parseDouble(this.getTextField().getText());
+			operator = '*';		
+			num1 *= num2;
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else {
+			sum();
+		}
+		
 	}
 	
 	public void division() {
-		num2 = num1;
-		num1 = Double.parseDouble(this.getTextField().getText());	
-		operator = '/';									
-		num1 /= num2;
-		this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+
+		if (this.getLabel().getText().isEmpty()) {
+			num1 = Double.parseDouble(this.getTextField().getText());
+			operator = '/';
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
+			num2 = Double.parseDouble(this.getTextField().getText());
+			operator = '/';		
+			num1 /= num2;
+			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+		} else {
+			sum();
+		}
+		
 	}
 	
 	public void sum() {
+		
 		num2 = Double.parseDouble(this.getTextField().getText());	
 
-		//addition method review & subsequent others
 		switch (operator) {		 
 			case '+': 
 				result = num1 + num2;
@@ -147,6 +191,9 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			case '/': 
 				result = num1 / num2;
 				break;
+			case '%':
+				result = (num2 / num1) * 100;
+				break;
 		}
 		
 		if (result == 5318008) {
@@ -154,11 +201,9 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 		}
 
 		this.getTextField().setText(removeZeroDecimal(Double.toString(result)));
-
-		this.getLabel().setText(removeZeroDecimal(String.valueOf(result)));
-		clearTextField();		
-		num2=result;
-		num1=0;
+		clearLabel();
+		num1 = result;
+		result = 0;
 	}
 
 	private void bearbies() {
@@ -230,6 +275,20 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			clearTextField();							
 		}
 		
+		///needs work to improve the printing and memory functionality
+		if (source == this.getPercentButton()) {
+			
+			if (this.getLabel().getText().isEmpty()) {
+				num1 = Double.parseDouble(this.getTextField().getText());
+				operator = '%';
+				this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
+				clearTextField();
+			} else {
+				sum();
+			}
+			
+		}
+
 		if(source == this.getSqrRootButton()) {
 			num1 = Double.parseDouble(this.getTextField().getText());
 			Double squareRoot = Math.sqrt(num1);
@@ -250,14 +309,6 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			this.getTextField().setText(string);
 		}
 		
-		///needs work to improve the printing and memory functionality
-		if (source == this.getPercentButton()) {
-			num2 = num1;
-			num1 = Double.parseDouble(this.getTextField().getText());
-			result = (num2 / num1) * 100;
-			this.getLabel().setText(removeZeroDecimal(Double.toString(result)));
-			clearTextField();
-		}
 		
 		if(source == this.getEquButton()) {				 
 			sum();
@@ -272,16 +323,12 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 		}
 		
 		if(source == this.getDelButton()) {							
-			String textMemory = this.getTextField().getText();		
-			clearTextField();							
-			for (int i = 0; i < textMemory.length() - 1; i++) {	
-				this.getTextField().setText(this.getTextField().getText() + textMemory.charAt(i));
-			}
+			deleteLastChar();
 		}
 		
 		if(source == this.getNegButton()) {		
 			double temporaryValue = Double.parseDouble(this.getTextField().getText());	
-			temporaryValue*=-1;								
+			temporaryValue *= -1;		
 			this.getTextField().setText(removeZeroDecimal(String.valueOf(temporaryValue)));	
 		}
 		
@@ -349,6 +396,10 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 		
 		if (e.getKeyCode() == 10) {
 			sum();
+		}
+		
+		if (e.getKeyCode() == 8) {
+			deleteLastChar();
 		}
 		
 	}
