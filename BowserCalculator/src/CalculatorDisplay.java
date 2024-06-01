@@ -33,7 +33,7 @@ public class CalculatorDisplay {
 		frame.setDefaultCloseOperation(CalcConstants.FRAME_CLOSE_METHOD);//what the x button does on clicking
 		frame.setSize(CalcConstants.FRAME_WIDTH,CalcConstants.FRAME_HEIGHT);								//this sets the size and customability measured by pixels 420 pixels by 550
 		frame.getContentPane().setLayout(CalcConstants.FRAME_LAYOUT_MANAGER);	
-		frame.setBackground(CalcConstants.FRAME_BACKGROUND);
+		frame.getContentPane().setBackground(CalcConstants.FRAME_BACKGROUND);
 		frame.setResizable(CalcConstants.FRAME_RESIZABLE);	
 		frame.setLocationRelativeTo(CalcConstants.FRAME_SPAWN_OPEN);//sets popup location to centre of screen
 		frame.setIconImage(icon.getImage());
@@ -47,12 +47,13 @@ public class CalculatorDisplay {
 						CalcConstants.LABEL_WIDTH,CalcConstants.LABEL_HEIGHT);
 		label.setBackground(CalcConstants.LABEL_BACKGROUND);
 		label.setForeground(CalcConstants.LABEL_FOREGROUND);
+		label.setFont(CalcConstants.FONT_OCR);
 		label.setHorizontalAlignment(CalcConstants.LABEL_TEXT_HORIZONTAL_ALIGNMENT);
 		
 		textField = new JTextField();				
 		textField.setBounds(CalcConstants.TEXTFIELD_XPOSITION,CalcConstants.TEXTFIELD_YPOSITION,
 							CalcConstants.TEXTFIELD_WIDTH,CalcConstants.TEXTFIELD_HEIGHT);	
-		textField.setFont(CalcConstants.FONT_WESTMINSTER);							
+		textField.setFont(CalcConstants.FONT_OCR);							
 		textField.setEditable(CalcConstants.TEXTFIELD_EDITABLE);
 		textField.setHorizontalAlignment(CalcConstants.TEXTFIELD_TEXT_HORIZONTAL_ALIGNMENT);
 		

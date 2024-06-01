@@ -58,7 +58,6 @@ public class CalcConstants {
 	
 	// Personalization of app details
 	public static final Font FONT_OCR = new Font("OCR A Extended", Font.BOLD,30);
-	public static final Font FONT_WESTMINSTER = new Font("Westminster", Font.BOLD,20);
 	
 	public static final int FRAME_CLOSE_METHOD = JFrame.EXIT_ON_CLOSE;
 	public static final Color FRAME_BACKGROUND = Color.BLACK;
