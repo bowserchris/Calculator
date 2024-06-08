@@ -6,42 +6,47 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class CalculatorDisplay {
-	
-	private JFrame frame;							
-	private JPanel panel;	
+
+	private JFrame frame;
+	private JPanel panel;
 	private JLabel label;
-	private JTextField textField;						
-	private JButton[] numberButtons = new JButton[10];	
+	private JTextField textField;
+	private JButton[] numberButtons = new JButton[10];
 	private JButton[] functionButtons = new JButton[12];
-	private JButton addButton, subButton, mulButton, divButton, 
+	private JButton addButton, subButton, mulButton, divButton,
 					sqrButton, sqrRootButton, decButton, equButton,
-					delButton, clrButton, negButton, reciButton, percentButton;		
-	
+					delButton, clrButton, negButton, reciButton, percentButton;
+
 	public CalculatorDisplay() {
-		
+
 		createGUI();
 		createComponents();
 		createButtons();
-		
+
 	}
 
 	private void createGUI() {
-		
-		ImageIcon icon = new ImageIcon(CalcConstants.APP_ICON_PATH);
+
+		ImageIcon icon;
+		java.net.URL imageURL = getClass().getResource(CalcConstants.APP_ICON_PATH);
 		
 		frame = new JFrame(CalcConstants.APP_TITLE);			//instantiates the frame with my designated title 'bowser calculator' or whatever else i wish to input
 		frame.setDefaultCloseOperation(CalcConstants.FRAME_CLOSE_METHOD);//what the x button does on clicking
 		frame.setSize(CalcConstants.FRAME_WIDTH,CalcConstants.FRAME_HEIGHT);								//this sets the size and customability measured by pixels 420 pixels by 550
-		frame.getContentPane().setLayout(CalcConstants.FRAME_LAYOUT_MANAGER);	
+		frame.getContentPane().setLayout(CalcConstants.FRAME_LAYOUT_MANAGER);
 		frame.getContentPane().setBackground(CalcConstants.FRAME_BACKGROUND);
-		frame.setResizable(CalcConstants.FRAME_RESIZABLE);	
+		frame.setResizable(CalcConstants.FRAME_RESIZABLE);
 		frame.setLocationRelativeTo(CalcConstants.FRAME_SPAWN_OPEN);//sets popup location to centre of screen
-		frame.setIconImage(icon.getImage());
 		
+		if (imageURL != null) {
+			icon = new ImageIcon(imageURL);
+			frame.setIconImage(icon.getImage());
+		}
+
 	}
-	
+
 	private void createComponents() {
-		
+
 		label = new JLabel();
 		label.setBounds(CalcConstants.LABEL_XPOSITION,CalcConstants.LABEL_YPOSITION,
 						CalcConstants.LABEL_WIDTH,CalcConstants.LABEL_HEIGHT);
@@ -49,22 +54,22 @@ public class CalculatorDisplay {
 		label.setForeground(CalcConstants.LABEL_FOREGROUND);
 		label.setFont(CalcConstants.FONT_OCR);
 		label.setHorizontalAlignment(CalcConstants.LABEL_TEXT_HORIZONTAL_ALIGNMENT);
-		
-		textField = new JTextField();				
+
+		textField = new JTextField();
 		textField.setBounds(CalcConstants.TEXTFIELD_XPOSITION,CalcConstants.TEXTFIELD_YPOSITION,
-							CalcConstants.TEXTFIELD_WIDTH,CalcConstants.TEXTFIELD_HEIGHT);	
-		textField.setFont(CalcConstants.FONT_OCR);							
+							CalcConstants.TEXTFIELD_WIDTH,CalcConstants.TEXTFIELD_HEIGHT);
+		textField.setFont(CalcConstants.FONT_OCR);
 		textField.setEditable(CalcConstants.TEXTFIELD_EDITABLE);
 		textField.setHorizontalAlignment(CalcConstants.TEXTFIELD_TEXT_HORIZONTAL_ALIGNMENT);
-		
-		panel = new JPanel();			
-		panel.setBounds(CalcConstants.PANEL_XPOSITION, CalcConstants.PANEL_YPOSITION, 
+
+		panel = new JPanel();
+		panel.setBounds(CalcConstants.PANEL_XPOSITION, CalcConstants.PANEL_YPOSITION,
 						CalcConstants.PANEL_WIDTH, CalcConstants.PANEL_HEIGHT);
-		panel.setLayout(CalcConstants.PANEL_LAYOUT_MANAGER); 
+		panel.setLayout(CalcConstants.PANEL_LAYOUT_MANAGER);
 		panel.setBackground(CalcConstants.PANEL_BACKGROUND);
-		
+
 	}
-	
+
 	private void createButtons() {
 
 		addButton = new JButton(CalcConstants.STRING_ADD_BUTTON);
@@ -89,7 +94,7 @@ public class CalculatorDisplay {
 		sqrRootButton = new JButton(CalcConstants.STRING_SQRROOT_BUTTON);
 		reciButton = new JButton(CalcConstants.STRING_RECI_BUTTON);
 		percentButton = new JButton(CalcConstants.STRING_PERCENT_BUTTON);
-		
+
 		functionButtons[0] = addButton;
 		functionButtons[1] = subButton;
 		functionButtons[2] = mulButton;
@@ -102,14 +107,14 @@ public class CalculatorDisplay {
 		functionButtons[9] = sqrButton;
 		functionButtons[10] = sqrRootButton;
 		functionButtons[11] = reciButton;
-		
+
 		negButton.setBounds(CalcConstants.BUTTON_NEG_XPOSITION,CalcConstants.BUTTON_NEG_YPOSITION,
 							CalcConstants.BUTTON_NEG_WIDTH,CalcConstants.BUTTON_NEG_HEIGHT);
 		delButton.setBounds(CalcConstants.BUTTON_DEL_XPOSITION,CalcConstants.BUTTON_DEL_YPOSITION,
-							CalcConstants.BUTTON_DEL_WIDTH,CalcConstants.BUTTON_DEL_HEIGHT);		
+							CalcConstants.BUTTON_DEL_WIDTH,CalcConstants.BUTTON_DEL_HEIGHT);
 		clrButton.setBounds(CalcConstants.BUTTON_CLR_XPOSITION,CalcConstants.BUTTON_CLR_YPOSITION,
 							CalcConstants.BUTTON_CLR_WIDTH,CalcConstants.BUTTON_CLR_HEIGHT);
-		
+
 	}
 
 	public JFrame getFrame() {
@@ -263,7 +268,7 @@ public class CalculatorDisplay {
 	public void setPercentButton(JButton percentButton) {
 		this.percentButton = percentButton;
 	}
-	
-	
+
+
 
 }

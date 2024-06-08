@@ -3,126 +3,121 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class CalculatorFunction extends CalculatorDisplay implements ActionListener, KeyListener {
-	
+
 	double num1 = 0, num2 = 0, result = 0;
-	char operator;	
-	
+	char operator;
+
 	public CalculatorFunction() {
-		
+
 		addListeners();
 		addToFrame();
-		
+
 	}
 
 	private void addListeners() {
-		
+
 		for (int i = 0; i < this.getFunctionButtons().length; i++) {
-			this.getFunctionButtons()[i].addActionListener(this);		
-			this.getFunctionButtons()[i].setFont(CalcConstants.FONT_OCR);				
-			this.getFunctionButtons()[i].setFocusable(CalcConstants.FUNCTION_BUTTON_FOCUSABLE);	
+			this.getFunctionButtons()[i].addActionListener(this);
+			this.getFunctionButtons()[i].setFont(CalcConstants.FONT_OCR);
+			this.getFunctionButtons()[i].setFocusable(CalcConstants.FUNCTION_BUTTON_FOCUSABLE);
 		}
-		
+
 		for (int i = 0; i < this.getNumberButtons().length; i++) {
-			this.getNumberButtons()[i] = new JButton(String.valueOf(i));	
-			this.getNumberButtons()[i].addActionListener(this);		
-			this.getNumberButtons()[i].setFont(CalcConstants.FONT_OCR);		
-			this.getNumberButtons()[i].setFocusable(CalcConstants.NUMBER_BUTTON_FOCUSABLE);	
+			this.getNumberButtons()[i] = new JButton(String.valueOf(i));
+			this.getNumberButtons()[i].addActionListener(this);
+			this.getNumberButtons()[i].setFont(CalcConstants.FONT_OCR);
+			this.getNumberButtons()[i].setFocusable(CalcConstants.NUMBER_BUTTON_FOCUSABLE);
 		}
-		
+
 		this.getFrame().addKeyListener(this);
-		
+
 	}
 
 	private void addToFrame() {
-		
+
 		this.getPanel().add(this.getSqrButton());
 		this.getPanel().add(this.getSqrRootButton());
 		this.getPanel().add(this.getReciButton());
 		this.getPanel().add(this.getPercentButton());
-		
+
 		this.getPanel().add(this.getNumberButtons()[1]);
 		this.getPanel().add(this.getNumberButtons()[2]);
 		this.getPanel().add(this.getNumberButtons()[3]);
 		this.getPanel().add(this.getAddButton());
-		
+
 		this.getPanel().add(this.getNumberButtons()[4]);
 		this.getPanel().add(this.getNumberButtons()[5]);
 		this.getPanel().add(this.getNumberButtons()[6]);
 		this.getPanel().add(this.getSubButton());
-		
+
 		this.getPanel().add(this.getNumberButtons()[7]);
 		this.getPanel().add(this.getNumberButtons()[8]);
 		this.getPanel().add(this.getNumberButtons()[9]);
 		this.getPanel().add(this.getMulButton());
-		
+
 		this.getPanel().add(this.getDecButton());
 		this.getPanel().add(this.getNumberButtons()[0]);
 		this.getPanel().add(this.getEquButton());
 		this.getPanel().add(this.getDivButton());
-		
-		this.getFrame().add(this.getPanel()); 									
+
+		this.getFrame().add(this.getPanel());
 		this.getFrame().add(this.getNegButton());
-		this.getFrame().add(this.getDelButton());								
-		this.getFrame().add(this.getClrButton());								
-		this.getFrame().add(this.getTextField());	 
+		this.getFrame().add(this.getDelButton());
+		this.getFrame().add(this.getClrButton());
+		this.getFrame().add(this.getTextField());
 		this.getFrame().add(this.getLabel());
 		this.getFrame().setFocusable(true);
 		this.getFrame().setVisible(true);
-		
+
 	}
-	
+
 	public void clearLabel() {
 		this.getLabel().setText("");
 	}
-	
+
 	public void clearTextField() {
 		this.getTextField().setText("");
 	}
-	
+
 	public static String removeZeroDecimal(String s) {
 		String string = s;
 		if (string.endsWith(".0")) {
 			string = string.replace(".0", "");
-		} 
+		}
 		return string;
 	}
-	
+
 	private void deleteLastChar() {
-		String textMemory = this.getTextField().getText();		
-		clearTextField();							
-		for (int i = 0; i < textMemory.length() - 1; i++) {	
+		String textMemory = this.getTextField().getText();
+		clearTextField();
+		for (int i = 0; i < textMemory.length() - 1; i++) {
 			this.getTextField().setText(this.getTextField().getText() + textMemory.charAt(i));
 		}
 	}
-	
+
 	public void addition() {
-		
+
 		if (this.getLabel().getText().isEmpty()) {
 			num1 = Double.parseDouble(this.getTextField().getText());
 			operator = '+';
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
 			num2 = Double.parseDouble(this.getTextField().getText());
-			operator = '+';		
+			operator = '+';
 			num1 += num2;
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else {
 			sum();
 		}
-		
+
 	}
-	
+
 	public void subtraction() {
 
 		if (this.getLabel().getText().isEmpty()) {
@@ -131,15 +126,15 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
 			num2 = Double.parseDouble(this.getTextField().getText());
-			operator = '-';		
+			operator = '-';
 			num1 -= num2;
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else {
 			sum();
 		}
-		
+
 	}
-	
+
 	public void multiply() {
 
 		if (this.getLabel().getText().isEmpty()) {
@@ -148,15 +143,15 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
 			num2 = Double.parseDouble(this.getTextField().getText());
-			operator = '*';		
+			operator = '*';
 			num1 *= num2;
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else {
 			sum();
 		}
-		
+
 	}
-	
+
 	public void division() {
 
 		if (this.getLabel().getText().isEmpty()) {
@@ -165,37 +160,37 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else if (!this.getTextField().getText().isEmpty() && result == 0) {
 			num2 = Double.parseDouble(this.getTextField().getText());
-			operator = '/';		
+			operator = '/';
 			num1 /= num2;
 			this.getLabel().setText(removeZeroDecimal(Double.toString(num1)) + operator);
 		} else {
 			sum();
 		}
-		
-	}
-	
-	public void sum() {
-		
-		num2 = Double.parseDouble(this.getTextField().getText());	
 
-		switch (operator) {		 
-			case '+': 
+	}
+
+	public void sum() {
+
+		num2 = Double.parseDouble(this.getTextField().getText());
+
+		switch (operator) {
+			case '+':
 				result = num1 + num2;
 				break;
-			case '-': 
+			case '-':
 				result = num1 - num2;
 				break;
-			case '*': 
+			case '*':
 				result = num1 * num2;
 				break;
-			case '/': 
+			case '/':
 				result = num1 / num2;
 				break;
 			case '%':
 				result = (num2 / num1) * 100;
 				break;
 		}
-		
+
 		if (result == 5318008) {
 			bearbies();
 		}
@@ -208,76 +203,71 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 
 	private void bearbies() {
 		
-		File image = new File(CalcConstants.APP_FOTO_PATH);
-		BufferedImage img = null;
-		
-		try {
-			img = ImageIO.read(image);
-		} catch (IOException ioe) {
-			ioe.printStackTrace(System.out);
+		java.net.URL imageUrl = getClass().getResource(CalcConstants.APP_FOTO_PATH);
+
+		if (imageUrl != null) {
+			ImageIcon icon = new ImageIcon(imageUrl);
+			Image image = icon.getImage().getScaledInstance(CalcConstants.POP_UP_FOTO_WIDTH,CalcConstants.POP_UP_FOTO_HEIGHT,
+											CalcConstants.POP_UP_FOTO_HINTS);
+			display(image);
 		}
-		
-		if (img != null) {
-			display(img);
-		}
-		
+
 	}
 
-	private void display(BufferedImage img) {
-		
+	private void display(Image img) {
+
 		JFrame frame = new JFrame(CalcConstants.POP_UP_FOTO_TITLE);
 		JLabel label = new JLabel();
-		Image icon = img.getScaledInstance(CalcConstants.POP_UP_FOTO_WIDTH,CalcConstants.POP_UP_FOTO_HEIGHT,
-											CalcConstants.POP_UP_FOTO_HINTS);
+
 		frame.setSize(CalcConstants.POP_UP_FOTO_WIDTH,CalcConstants.POP_UP_FOTO_HEIGHT);
 		frame.setIconImage(img);
-		label.setIcon(new ImageIcon(icon));
+		label.setIcon(new ImageIcon(img));
 		frame.getContentPane().add(label, CalcConstants.POP_UP_FOTO_LAYOUT);
 		frame.setDefaultCloseOperation(CalcConstants.POP_UP_FOTO_CLOSE_METHOD);
 		frame.setLocationRelativeTo(CalcConstants.POP_UP_FOTO_SPAWN_OPEN);
 		frame.pack(); 			//attaches image to frame
 		frame.setVisible(CalcConstants.POP_UP_FOTO_FRAME_VISIBLE);
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		Object source = e.getSource();
-		
+
 		for(int i = 0; i < 10; i++) {
 			if(source == this.getNumberButtons()[i]) {
 				this.getTextField().setText(this.getTextField().getText().concat(String.valueOf(i)));
 			}
 		}
-		
-		if(source == this.getDecButton()) {	 
+
+		if(source == this.getDecButton()) {
 			this.getTextField().setText(this.getTextField().getText().concat(CalcConstants.STRING_DEC_BUTTON));
 		}
-		
-		if(source == this.getAddButton()) {			
+
+		if(source == this.getAddButton()) {
 			addition();
-			clearTextField();		
+			clearTextField();
 		}
-		
-		if(source == this.getSubButton()) {	
+
+		if(source == this.getSubButton()) {
 			subtraction();
 			clearTextField();
 		}
-		
-		if(source == this.getMulButton()) {	
+
+		if(source == this.getMulButton()) {
 			multiply();
-			clearTextField();							
+			clearTextField();
 		}
-		
-		if(source == this.getDivButton()) {	  
+
+		if(source == this.getDivButton()) {
 			division();
-			clearTextField();							
+			clearTextField();
 		}
-		
+
 		///needs work to improve the printing and memory functionality
 		if (source == this.getPercentButton()) {
-			
+
 			if (this.getLabel().getText().isEmpty()) {
 				num1 = Double.parseDouble(this.getTextField().getText());
 				operator = '%';
@@ -286,7 +276,7 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			} else {
 				sum();
 			}
-			
+
 		}
 
 		if(source == this.getSqrRootButton()) {
@@ -294,49 +284,49 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 			Double squareRoot = Math.sqrt(num1);
 			this.getTextField().setText(removeZeroDecimal(Double.toString(squareRoot)));
 		}
-		
+
 		if(source == this.getSqrButton()) {
 			num1 = Double.parseDouble(this.getTextField().getText());
 			double square = Math.pow(num1, 2);
 			String string = removeZeroDecimal(Double.toString(square));
 			this.getTextField().setText(string);
 		}
-		
+
 		if(source == this.getReciButton()) {
 			num1 = Double.parseDouble(this.getTextField().getText());
 			double reciprocal = 1 / num1;
 			String string = removeZeroDecimal(Double.toString(reciprocal));
 			this.getTextField().setText(string);
 		}
-		
-		
-		if(source == this.getEquButton()) {				 
+
+
+		if(source == this.getEquButton()) {
 			sum();
 		}
-		
-		if(source == this.getClrButton()) { 				
+
+		if(source == this.getClrButton()) {
 			clearLabel();
 			clearTextField();
 			num1 = 0;
 			num2 = 0;
 			result = 0;
 		}
-		
-		if(source == this.getDelButton()) {							
+
+		if(source == this.getDelButton()) {
 			deleteLastChar();
 		}
-		
-		if(source == this.getNegButton()) {		
-			double temporaryValue = Double.parseDouble(this.getTextField().getText());	
-			temporaryValue *= -1;		
-			this.getTextField().setText(removeZeroDecimal(String.valueOf(temporaryValue)));	
+
+		if(source == this.getNegButton()) {
+			double temporaryValue = Double.parseDouble(this.getTextField().getText());
+			temporaryValue *= -1;
+			this.getTextField().setText(removeZeroDecimal(String.valueOf(temporaryValue)));
 		}
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 		switch (e.getKeyChar()) {
 			case '1':
 				this.getTextField().setText(this.getTextField().getText() + 1);
@@ -388,25 +378,25 @@ public class CalculatorFunction extends CalculatorDisplay implements ActionListe
 				this.getTextField().setText(this.getTextField().getText() + ".");
 				break;
 		}
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		if (e.getKeyCode() == 10) {
 			sum();
 		}
-		
+
 		if (e.getKeyCode() == 8) {
 			deleteLastChar();
 		}
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+
 	}
 
 }
