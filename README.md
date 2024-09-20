@@ -30,24 +30,32 @@ The issues that came up when developing:
 
 ### Tasks
 Following steps requried:
-  - [ ] addition
-  - [ ] subtraction
-  - [ ] multiplication
-  - [ ] division
+  - [x] addition
+  - [x] subtraction
+  - [x] multiplication
+  - [x] division
   - [ ] modular
-  - [ ] square root
-  - [ ] exponentials
+  - [x] square root
+  - [x] exponentials
   - [ ] register in memory 1 variable
   - [ ] summon registered variable
-  - [ ] delete registered variable
+  - [x] delete registered variable
   - [ ] constant values: pi
   - [ ] constant values: e
-  - [ ] each step it must show result on screen
+  - [x] each step it must show result on screen
   - [ ] absolute value
   - [ ] algorithms
   - [ ] radiants
-  - [ ] rigonomic functions
-  - [ ] frontend UI
-  - [ ] Convert into .exe
+  - [ ] trigonomic functions
+  - [x] frontend UI
+  - [x] Convert into .exe
 
 ## Revision & Updates
+
+Current version has basic functions, a UI and an executable. V.1.0.2 is updated so the .exe works on other computers.
+
+For future updates or revisions:
+
+- Update UI using javafx sceneeditor for v.2.0.0
+- Update UI using with css stylesheet for v.3.0.0
+- Limit it to one instance of the .exe when its opened
